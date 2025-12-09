@@ -17,7 +17,9 @@ class PelayananFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nama_pelayanan' => $this->faker->unique()->randomElement(['Singer', 'Worship', 'Multimedia', 'Usher', 'Penyambut', 'Kolektan', 'Pemandu', 'Doa']),
+            'deskripsi' => $this->faker->sentence(),
+            'is_active' => true,
         ];
     }
 }
