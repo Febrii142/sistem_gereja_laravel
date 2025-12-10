@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('keterangan')->nullable();
             $table->string('nama_pemberi')->nullable();
             $table->enum('metode_pembayaran', ['Tunai', 'Transfer', 'Kartu', 'Lainnya'])->default('Tunai');
-            $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('set null');
+            $table->unsignedBigInteger('created_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('komsel_members', function (Blueprint $table) {
+        Schema::create('pelayans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('komsel_id')->constrained('komsels')->onDelete('cascade');
-            $table->foreignId('jemaat_id')->constrained('jemaats')->onDelete('cascade');
-            $table->date('tanggal_bergabung')->nullable();
+            $table->unsignedBigInteger('jemaat_id');
+            $table->unsignedBigInteger('pelayanan_id');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
+            $table->softDeletes();
             
-            $table->unique(['komsel_id', 'jemaat_id']);
+            $table->unique(['jemaat_id', 'pelayanan_id']);
         });
     }
 
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('komsel_members');
+        Schema::dropIfExists('pelayans');
     }
 };
