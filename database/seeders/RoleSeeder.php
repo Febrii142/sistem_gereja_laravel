@@ -19,11 +19,11 @@ class RoleSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         // Create roles
-        $superAdmin = Role::create(['name' => 'Super Admin']);
-        $admin = Role::create(['name' => 'Admin']);
-        $sekretaris = Role::create(['name' => 'Sekretaris']);
-        $bendahara = Role::create(['name' => 'Bendahara']);
-        $jemaat = Role::create(['name' => 'Jemaat']);
+        $superAdmin = Role::firstOrCreate(['name' => 'Super Admin'], ['guard_name' => 'web']);
+        $admin = Role::firstOrCreate(['name' => 'Admin'], ['guard_name' => 'web']);
+        $sekretaris = Role::firstOrCreate(['name' => 'Sekretaris'], ['guard_name' => 'web']);
+        $bendahara = Role::firstOrCreate(['name' => 'Bendahara'], ['guard_name' => 'web']);
+        $jemaat = Role::firstOrCreate(['name' => 'Jemaat'], ['guard_name' => 'web']);
 
         // Create permissions
         $permissions = [
@@ -40,7 +40,7 @@ class RoleSeeder extends Seeder
         ];
 
         foreach ($permissions as $permission) {
-            Permission::create(['name' => $permission]);
+            Permission::firstOrCreate(['name' => $permission], ['guard_name' => 'web']);
         }
 
         // Assign permissions to roles
@@ -77,39 +77,49 @@ class RoleSeeder extends Seeder
         ]);
 
         // Create default users
-        $user1 = User::create([
-            'name' => 'Super Admin',
-            'email' => 'admin@gereja.com',
-            'password' => Hash::make('password'),
-        ]);
+        $user1 = User::firstOrCreate(
+            ['email' => 'admin@gereja.com'],
+            [
+                'name' => 'Super Admin',
+                'password' => Hash::make('password'),
+            ]
+        );
         $user1->assignRole('Super Admin');
 
-        $user2 = User::create([
-            'name' => 'Admin User',
-            'email' => 'admin2@gereja.com',
-            'password' => Hash::make('password'),
-        ]);
+        $user2 = User::firstOrCreate(
+            ['email' => 'admin2@gereja.com'],
+            [
+                'name' => 'Admin User',
+                'password' => Hash::make('password'),
+            ]
+        );
         $user2->assignRole('Admin');
 
-        $user3 = User::create([
-            'name' => 'Sekretaris',
-            'email' => 'sekretaris@gereja.com',
-            'password' => Hash::make('password'),
-        ]);
+        $user3 = User::firstOrCreate(
+            ['email' => 'sekretaris@gereja.com'],
+            [
+                'name' => 'Sekretaris',
+                'password' => Hash::make('password'),
+            ]
+        );
         $user3->assignRole('Sekretaris');
 
-        $user4 = User::create([
-            'name' => 'Bendahara',
-            'email' => 'bendahara@gereja.com',
-            'password' => Hash::make('password'),
-        ]);
+        $user4 = User::firstOrCreate(
+            ['email' => 'bendahara@gereja.com'],
+            [
+                'name' => 'Bendahara',
+                'password' => Hash::make('password'),
+            ]
+        );
         $user4->assignRole('Bendahara');
 
-        $user5 = User::create([
-            'name' => 'Jemaat User',
-            'email' => 'jemaat@gereja.com',
-            'password' => Hash::make('password'),
-        ]);
+        $user5 = User::firstOrCreate(
+            ['email' => 'jemaat@gereja.com'],
+            [
+                'name' => 'Jemaat User',
+                'password' => Hash::make('password'),
+            ]
+        );
         $user5->assignRole('Jemaat');
     }
 }
