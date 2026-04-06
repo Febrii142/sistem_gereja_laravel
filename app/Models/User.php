@@ -57,4 +57,9 @@ class User extends Authenticatable
             ->logOnlyDirty()
             ->dontSubmitEmptyLogs();
     }
+
+    public function jemaat()
+    {
+        return $this->hasOne(Jemaat::class);
+    }
 }

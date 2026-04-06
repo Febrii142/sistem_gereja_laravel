@@ -18,6 +18,7 @@ class JemaatFactory extends Factory
     public function definition(): array
     {
         return [
+            'user_id' => null,
             'nama_lengkap' => $this->faker->name(),
             'nik' => $this->faker->unique()->numerify('################'),
             'tempat_lahir' => $this->faker->city(),
@@ -34,6 +35,8 @@ class JemaatFactory extends Factory
             'tanggal_baptis' => $this->faker->optional()->date('Y-m-d', '-5 years'),
             'tanggal_sidi' => $this->faker->optional()->date('Y-m-d', '-3 years'),
             'is_active' => $this->faker->boolean(90), // 90% active
+            'keluarga_id' => null,
+            'status_wakil_keluarga' => false,
         ];
     }
 }

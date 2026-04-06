@@ -49,6 +49,8 @@ class SeederTest extends TestCase
             'view reports',
             'manage settings',
             'view activity-log',
+            'view own profile',
+            'edit own profile',
         ];
 
         $this->assertEquals(count($expectedPermissions), Permission::count());

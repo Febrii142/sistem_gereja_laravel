@@ -13,6 +13,7 @@ class Jemaat extends Model
     use HasFactory, SoftDeletes, LogsActivity;
 
     protected $fillable = [
+        'user_id',
         'nama_lengkap',
         'nik',
         'tempat_lahir',
@@ -31,6 +32,8 @@ class Jemaat extends Model
         'foto',
         'is_active',
         'komsel_id',
+        'keluarga_id',
+        'status_wakil_keluarga',
     ];
 
     protected $casts = [
@@ -38,6 +41,7 @@ class Jemaat extends Model
         'tanggal_baptis' => 'date',
         'tanggal_sidi' => 'date',
         'is_active' => 'boolean',
+        'status_wakil_keluarga' => 'boolean',
     ];
 
     public function getActivitylogOptions(): LogOptions
@@ -49,6 +53,21 @@ class Jemaat extends Model
     }
 
     // Relationships
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function keluarga()
+    {
+        return $this->belongsTo(Keluarga::class);
+    }
+
+    public function baptisans()
+    {
+        return $this->hasMany(Baptisan::class);
+    }
+
     public function komsel()
     {
         return $this->belongsTo(Komsel::class);
