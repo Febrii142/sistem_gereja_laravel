@@ -37,6 +37,8 @@ class RoleSeeder extends Seeder
             'view reports',
             'manage settings',
             'view activity-log',
+            'view own profile',
+            'edit own profile',
         ];
 
         foreach ($permissions as $permission) {
@@ -74,6 +76,8 @@ class RoleSeeder extends Seeder
 
         $jemaat->givePermissionTo([
             'view dashboard',
+            'view own profile',
+            'edit own profile',
         ]);
 
         // Create default users

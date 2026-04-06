@@ -5,6 +5,9 @@ use App\Livewire\Dashboard\Index as DashboardIndex;
 use App\Livewire\Jemaat\Index as JemaatIndex;
 use App\Livewire\Jemaat\Create as JemaatCreate;
 use App\Livewire\Jemaat\Edit as JemaatEdit;
+use App\Livewire\Jemaat\Register as JemaatRegister;
+use App\Livewire\Jemaat\Profile as JemaatProfile;
+use App\Livewire\Jemaat\ProfileEdit as JemaatProfileEdit;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JemaatController;
 use App\Http\Controllers\JadwalController;
@@ -12,13 +15,20 @@ use App\Http\Controllers\KeuanganController;
 
 Route::view('/', 'welcome');
 
+// Public Jemaat Registration (no auth required)
+Route::get('jemaat/register', JemaatRegister::class)->name('jemaat.register');
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', DashboardIndex::class)->name('dashboard');
     
-    // Jemaat routes
+    // Jemaat management routes (for admin/secretary)
     Route::get('jemaat', JemaatIndex::class)->name('jemaat.index');
     Route::get('jemaat/create', JemaatCreate::class)->name('jemaat.create');
     Route::get('jemaat/{id}/edit', JemaatEdit::class)->name('jemaat.edit');
+    
+    // Jemaat self-service profile routes
+    Route::get('jemaat/profile', JemaatProfile::class)->name('jemaat.profile');
+    Route::get('jemaat/profile/edit', JemaatProfileEdit::class)->name('jemaat.profile.edit');
     
     Route::view('profile', 'profile')->name('profile');
 });
